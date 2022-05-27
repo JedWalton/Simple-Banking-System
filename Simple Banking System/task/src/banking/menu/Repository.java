@@ -10,7 +10,6 @@ public class Repository {
     public Repository() {
         this.customerAccounts =new ArrayList<CustomerAccount>();
     }
-
     public ArrayList<CustomerAccount> getCustomerAccounts() {
         return customerAccounts;
     }

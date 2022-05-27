@@ -17,7 +17,6 @@ public class MenuWithCustomerAccountStorage extends Repository {
     }
 
     public int getMenuOption_ZeroToTwoInclusive() {
-        System.out.print(">");
         Scanner scanner = new Scanner(System.in);
 
         int userin = scanner.nextInt();
@@ -42,20 +41,50 @@ public class MenuWithCustomerAccountStorage extends Repository {
         String cardNumberGenString = String.valueOf(numberGen);
         String checksum = "1";
         long cardNumberGen = Long.parseLong(bin.concat(cardNumberGenString).concat(checksum));
+
+        while (!passesLuhnsAlgorithm(cardNumberGen)) {
+            pinGen = 1000 + rnd.nextInt(9000 - 1);
+            numberGen = (100000000L + rnd.nextLong(900000000L));
+            bin = "400000";
+            cardNumberGenString = String.valueOf(numberGen);
+            checksum = "1";
+            cardNumberGen = Long.parseLong(bin.concat(cardNumberGenString).concat(checksum));
+        }
         System.out.println(cardNumberGen);
         System.out.println(pinGen);
 
 
-
-        if (!super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x == cardNumberGen)) {
+        long finalCardNumberGen = cardNumberGen;
+        if (!super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x == finalCardNumberGen)) {
             super.customerAccounts.add(new CustomerAccount(cardNumberGen, pinGen));
         }
         return "\nYour card has been created\n" +
                 "Your card number:\n" +
-                cardNumberGen +
+                finalCardNumberGen +
                 "\nYour card PIN:\n" +
                 pinGen +
                 "\n";
+    }
+
+    public boolean passesLuhnsAlgorithm(long cardNumberGen) {
+        String ccNumber = String.valueOf(cardNumberGen);
+        int sum = 0;
+        boolean alternate = false;
+        for (int i = ccNumber.length() - 1; i >= 0; i--)
+        {
+            long n = Long.parseLong(ccNumber.substring(i, i + 1));
+            if (alternate)
+            {
+                n *= 2;
+                if (n > 9)
+                {
+                    n = (n % 10) + 1;
+                }
+            }
+            sum += n;
+            alternate = !alternate;
+        }
+        return (sum % 10 == 0);
     }
 
     public boolean LogIntoAccount() {
@@ -64,7 +93,6 @@ public class MenuWithCustomerAccountStorage extends Repository {
         System.out.print(">");
         long cardNum = scanner.nextLong();
         System.out.println("Enter your PIN:");
-//        System.out.print(">");
         int pinNum = scanner.nextInt();
 
 

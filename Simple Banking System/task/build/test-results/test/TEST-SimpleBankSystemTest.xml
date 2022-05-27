@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-27T15:27:33" hostname="PC" time="0.121">
+<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-27T16:58:23" hostname="PC" time="0.157">
   <properties/>
-  <testcase name="start" classname="SimpleBankSystemTest" time="0.121"/>
+  <testcase name="start" classname="SimpleBankSystemTest" time="0.157"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 1. Create an account
 2. Log into account
 0. Exit
->> 1
-4000007606016151
-1215
+> 1
+4000008832193101
+4010
 1. Create an account
 2. Log into account
 0. Exit
->> 1
-4000003772479681
-3694
+> 1
+4000006964327091
+7595
 1. Create an account
 2. Log into account
 0. Exit
->> 0
+> 0
 Bye!
 ?[1;31m
 Start test 2?[0m
 1. Create an account
 2. Log into account
 0. Exit
->> 1
-4000007686963451
-3520
+> 1
+4000006571634921
+7661
 1. Create an account
 2. Log into account
 0. Exit
->> 2
+> 2
 
 Enter your card number:
->> 4000007686963451
+>> 4000006571634921
 Enter your PIN:
-> 3520
+> 7661
 
 You have successfully logged in!
 
 1. Balance
 2. Log out
 0. Exit
->> 2
+> 2
 
 You have successfully logged out!
 
 1. Create an account
 2. Log into account
 0. Exit
->> 0
+> 0
 Bye!
 ?[1;31m
 Start test 3?[0m
 1. Create an account
 2. Log into account
 0. Exit
->> 1
-4000002265983261
-9717
+> 1
+4000008640262551
+7851
 1. Create an account
 2. Log into account
 0. Exit
->> 2
+> 2
 
 Enter your card number:
->> 4000002265983261
+>> 4000008640262551
 Enter your PIN:
-> 5014
+> 1564
 
 Wrong card number or PIN!
 
 1. Create an account
 2. Log into account
 0. Exit
->> 0
+> 0
 Bye!
 ?[1;31m
 Start test 4?[0m
 1. Create an account
 2. Log into account
 0. Exit
->> 1
-4000004759926111
-3117
+> 1
+4000004859447991
+5204
 1. Create an account
 2. Log into account
 0. Exit
->> 2
+> 2
 
 Enter your card number:
->> 400000884864989
+>> 400000530713401
 Enter your PIN:
-> 3117
+> 5204
 
 Wrong card number or PIN!
 
@@ -106,33 +106,158 @@ Start test 5?[0m
 1. Create an account
 2. Log into account
 0. Exit
->> 1
-4000008176640571
-8828
+> 1
+4000006754737061
+8918
 1. Create an account
 2. Log into account
 0. Exit
->> 2
+> 2
 
 Enter your card number:
->> 4000008176640571
+>> 4000006754737061
 Enter your PIN:
-> 8828
+> 8918
 
 You have successfully logged in!
 
 1. Balance
 2. Log out
 0. Exit
->> 1
+> 1
 
 Balance: 0
 
 1. Balance
 2. Log out
 0. Exit
->> 0
+> 0
 Bye!
+?[1;31m
+Start test 6?[0m
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000001402411771
+1607
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000006169780771
+6439
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000009302951721
+3829
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000007978921341
+2933
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000009727305701
+6285
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000002704425691
+7437
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000002648013181
+5641
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000007985184701
+6813
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000007392418981
+3177
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000009821421941
+5070
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000009425269951
+2213
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000009338320701
+5473
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000009690846251
+4633
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000001879085041
+4900
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000002128209341
+7995
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000004838234221
+1694
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000005540232601
+6115
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000005750745201
+9484
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000003392636631
+2425
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000006995506051
+7430
+1. Create an account
+2. Log into account
+0. Exit
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
