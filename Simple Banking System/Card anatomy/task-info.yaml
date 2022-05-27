@@ -245,9 +245,6 @@ files:
 - name: src/banking/menu/MenuWithCustomerAccountStorage.java
   visible: true
   learner_created: true
-- name: src/banking/util/Pair.java
-  visible: true
-  learner_created: true
 - name: src/banking/menu/Repository.java
   visible: true
   learner_created: true
@@ -268,14 +265,9 @@ feedback:
     2. Log into account
     0. Exit
     &gt;&gt; 1
-    Your card has been created
-    Your card number:
-    247804592
-    Your card PIN:
-    6464
     1. Create an account
     2. Log into account
     0. Exit
     &gt;
-  time: Fri, 27 May 2022 13:17:45 UTC
+  time: Fri, 27 May 2022 15:11:01 UTC
 record: -1

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-05-27T13:17:45" hostname="PC" time="0.055">
+<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-05-27T15:11:01" hostname="PC" time="0.059">
   <properties/>
-  <testcase name="start" classname="SimpleBankSystemTest" time="0.055">
-    <failure message="java.lang.AssertionError: Wrong answer in test #1&#10;&#10;You are printing the card number incorrectly. The card number should look like in the example: 400000DDDDDDDDDD, where D is a digit.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt;&gt; 1&#10;Your card has been created&#10;Your card number:&#10;247804592&#10;Your card PIN:&#10;6464&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #1
+  <testcase name="start" classname="SimpleBankSystemTest" time="0.059">
+    <failure message="java.lang.AssertionError: Wrong answer in test #1&#10;&#10;You are printing the card number incorrectly. The card number should look like in the example: 400000DDDDDDDDDD, where D is a digit.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt;&gt; 1&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #1
 
 You are printing the card number incorrectly. The card number should look like in the example: 400000DDDDDDDDDD, where D is a digit.
 
@@ -15,11 +15,6 @@ Note that the '&gt;' character indicates the beginning of the input line.
 2. Log into account
 0. Exit
 &gt;&gt; 1
-Your card has been created
-Your card number:
-247804592
-Your card PIN:
-6464
 1. Create an account
 2. Log into account
 0. Exit
@@ -74,11 +69,6 @@ Start test 1?[0m
 2. Log into account
 0. Exit
 >> 1
-Your card has been created
-Your card number:
-247804592
-Your card PIN:
-6464
 1. Create an account
 2. Log into account
 0. Exit
