@@ -36,8 +36,16 @@ public class MenuWithCustomerAccountStorage extends Repository {
     public String generateCustomerAccount() {
         Random rnd = new Random();
         /* Generates pin numbers */
-        int pinGen = 1000 + rnd.nextInt(9000);
-        long cardNumberGen = (1000000000000000L + rnd.nextLong(9000000000000000L));
+        int pinGen = 1000 + rnd.nextInt(9000 - 1);
+        long numberGen = (100000000L + rnd.nextLong(900000000L));
+        String bin = "400000";
+        String cardNumberGenString = String.valueOf(numberGen);
+        String checksum = "1";
+        long cardNumberGen = Long.parseLong(bin.concat(cardNumberGenString).concat(checksum));
+        System.out.println(cardNumberGen);
+        System.out.println(pinGen);
+
+
 
         if (!super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x == cardNumberGen)) {
             super.customerAccounts.add(new CustomerAccount(cardNumberGen, pinGen));
@@ -56,7 +64,7 @@ public class MenuWithCustomerAccountStorage extends Repository {
         System.out.print(">");
         long cardNum = scanner.nextLong();
         System.out.println("Enter your PIN:");
-        System.out.print(">");
+//        System.out.print(">");
         int pinNum = scanner.nextInt();
 
 

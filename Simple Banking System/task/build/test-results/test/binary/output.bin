@@ -4,6 +4,128 @@
 2. Log into account
 0. Exit
 >> 1
+4000007606016151
+1215
 1. Create an account
 2. Log into account
 0. Exit
+>> 1
+4000003772479681
+3694
+1. Create an account
+2. Log into account
+0. Exit
+>> 0
+Bye!
+[1;31m
+Start test 2[0m
+1. Create an account
+2. Log into account
+0. Exit
+>> 1
+4000007686963451
+3520
+1. Create an account
+2. Log into account
+0. Exit
+>> 2
+
+Enter your card number:
+>> 4000007686963451
+Enter your PIN:
+> 3520
+
+!You have successfully logged in!
+
+1. Balance
+2. Log out
+0. Exit
+>> 2
+
+"You have successfully logged out!
+
+1. Create an account
+2. Log into account
+0. Exit
+>> 0
+Bye!
+[1;31m
+Start test 3[0m
+1. Create an account
+2. Log into account
+0. Exit
+>> 1
+4000002265983261
+9717
+1. Create an account
+2. Log into account
+0. Exit
+>> 2
+
+Enter your card number:
+>> 4000002265983261
+Enter your PIN:
+> 5014
+
+Wrong card number or PIN!
+
+1. Create an account
+2. Log into account
+0. Exit
+>> 0
+Bye!
+[1;31m
+Start test 4[0m
+1. Create an account
+2. Log into account
+0. Exit
+>> 1
+4000004759926111
+3117
+1. Create an account
+2. Log into account
+0. Exit
+>> 2
+
+Enter your card number:
+>> 400000884864989
+Enter your PIN:
+> 3117
+
+Wrong card number or PIN!
+
+1. Create an account
+2. Log into account
+0. Exit
+[1;31m
+Start test 5[0m
+1. Create an account
+2. Log into account
+0. Exit
+>> 1
+4000008176640571
+8828
+1. Create an account
+2. Log into account
+0. Exit
+>> 2
+
+Enter your card number:
+>> 4000008176640571
+Enter your PIN:
+> 8828
+
+!You have successfully logged in!
+
+1. Balance
+2. Log out
+0. Exit
+>> 1
+
+Balance: 0
+
+1. Balance
+2. Log out
+0. Exit
+>> 0
+Bye!
