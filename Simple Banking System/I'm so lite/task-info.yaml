@@ -489,7 +489,36 @@ files:
         }
     }
   learner_created: false
-- name: src/banking/menu/MenuWithCustomerAccountStorage.java
+- name: src/banking/account/CustomerAccount.java
+  visible: true
+  text: |
+    package banking.account;
+
+    public class CustomerAccount {
+        long cardNumber;
+        int pin;
+
+        public long getCardNumber() {
+            return cardNumber;
+        }
+
+        public int getPinNumber() {
+            return pin;
+        }
+
+        public CustomerAccount(long cardNumber, int pin) {
+            this.cardNumber = cardNumber;
+            this.pin = pin;
+        }
+    }
+  learner_created: true
+- name: card.s3db
+  visible: true
+  learner_created: true
+- name: src/banking/connect/Connect.java
+  visible: true
+  learner_created: true
+- name: src/banking/Application.java
   visible: true
   text: |+
     package banking.menu;
@@ -650,7 +679,7 @@ files:
 
 
   learner_created: true
-- name: src/banking/menu/Repository.java
+- name: src/banking/Repository.java
   visible: true
   text: |
     package banking.menu;
@@ -671,35 +700,6 @@ files:
 
     }
   learner_created: true
-- name: src/banking/account/CustomerAccount.java
-  visible: true
-  text: |
-    package banking.account;
-
-    public class CustomerAccount {
-        long cardNumber;
-        int pin;
-
-        public long getCardNumber() {
-            return cardNumber;
-        }
-
-        public int getPinNumber() {
-            return pin;
-        }
-
-        public CustomerAccount(long cardNumber, int pin) {
-            this.cardNumber = cardNumber;
-            this.pin = pin;
-        }
-    }
-  learner_created: true
-- name: card.s3db
-  visible: true
-  learner_created: true
-- name: src/banking/connect/Connect.java
-  visible: true
-  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/8427#comment
 status: Failed
 feedback:
@@ -719,36 +719,36 @@ feedback:
     2. Log into account
     0. Exit
     &gt; 1
-    4000007054135931
-    3314
+    4000006132728501
+    8862
     1. Create an account
     2. Log into account
     0. Exit
     &gt; 1
-    4000003695260691
-    5377
+    4000009115072871
+    3246
     1. Create an account
     2. Log into account
     0. Exit
     &gt; 1
-    4000007953075121
-    2539
+    4000006366802071
+    7946
     1. Create an account
     2. Log into account
     0. Exit
     &gt; 1
-    4000004894229651
-    4019
+    4000003875422541
+    2223
     1. Create an account
     2. Log into account
     0. Exit
     &gt; 1
-    4000004817418811
-    5954
+    4000002952843561
+    8955
     1. Create an account
     2. Log into account
     0. Exit
     &gt; 0
     Bye!
-  time: Sat, 28 May 2022 13:19:56 UTC
+  time: Sat, 28 May 2022 14:36:30 UTC
 record: -1

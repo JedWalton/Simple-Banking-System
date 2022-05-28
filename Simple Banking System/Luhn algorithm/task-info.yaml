@@ -291,7 +291,7 @@ files:
         }
     }
   learner_created: false
-- name: src/banking/menu/MenuWithCustomerAccountStorage.java
+- name: src/banking/menu/Application.java
   visible: true
   text: |+
     package banking.menu;

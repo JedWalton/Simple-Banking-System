@@ -1,4 +1,4 @@
-package banking.menu;
+package banking;
 
 import banking.account.CustomerAccount;
 import banking.connect.Connect;
@@ -6,9 +6,27 @@ import banking.connect.Connect;
 import java.util.Random;
 import java.util.Scanner;
 
-public class MenuWithCustomerAccountStorage extends Connect {
+public class Application extends Repository {
 
-    public MenuWithCustomerAccountStorage(String[] args) {
+    Connect connect;
+    boolean loginStatus;
+    int currentState;
+    public Application(String[] args) {
+        this.connect = new Connect(args);
+        loginStatus = false;
+        currentState = 0;
+        menuLoopEntryPoint();
+    }
+
+    /* This loop ends only by System.exit */
+    public void menuLoopEntryPoint() {
+        while (true) {
+            if (currentState == 0) {
+                currentState = menuOneLogic();
+            } else if (currentState == 1) {
+                currentState = menuTwoLogic();
+            }
+        }
     }
 
     public void displayCustomerAccountLoggedInView() {
@@ -65,7 +83,7 @@ public class MenuWithCustomerAccountStorage extends Connect {
 
         /* To be replaced with SQLite query */
 //        super.customerAccounts.add(new CustomerAccount(cardNumberGen, pinGen));
-        Connect.saveNewlyCreatedCard(new CustomerAccount(cardNumberGen, pinGen));
+        this.connect.saveNewlyCreatedCard(new CustomerAccount(cardNumberGen, pinGen));
 
 
         return "\nYour card has been created\n" +

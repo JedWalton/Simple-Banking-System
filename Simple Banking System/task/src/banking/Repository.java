@@ -1,4 +1,4 @@
-package banking.menu;
+package banking;
 
 
 import banking.account.CustomerAccount;

@@ -15,7 +15,7 @@ public class Connect {
     Connection conn;
     String[] args;
 
-    public Connect() {
+    public Connect(String[] args) {
         /* db parameters and config */
         this.url = "jdbc:sqlite:".concat(args[1]);
         this.dataSource = new SQLiteDataSource();
@@ -47,7 +47,7 @@ public class Connect {
 //            Statement creation
             try (Statement statement = con.createStatement()) {
 //                Statement execution
-                statement.executeUpdate("SELECT TABLE IF NOT EXISTS card (" +
+//                statement.executeUpdate("SELECT TABLE IF NOT EXISTS card (" +
             } catch (SQLException e) {
                 e.printStackTrace();
             }
