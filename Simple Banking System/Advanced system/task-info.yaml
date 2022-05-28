@@ -993,10 +993,10 @@ feedback_link: https://hyperskill.org/learn/step/8428#comment
 status: Failed
 feedback:
   message: |-
-    Wrong answer in test #10
+    Wrong answer in test #11
 
-    Account balance int the database is wrong after adding income.
-    Expected 10000
+    You should not allow to transfer to a card number that doesn&#39;t pass the Luhn algorithm.
+     You should print &#39;Probably you made mistake in the card number. Please try again!&#39;
 
     Please find below the output of your program during this failed test.
     Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
@@ -1009,17 +1009,23 @@ feedback:
     2. Log into account
     0. Exit
     &gt; 1
-    4000009456358111
-    9707
+    4000007465738091
+    2380
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 1
+    4000005596471251
+    4325
     1. Create an account
     2. Log into account
     0. Exit
     &gt; 2
 
     Enter your card number:
-    &gt;&gt; 4000009456358111
+    &gt;&gt; 4000005596471251
     Enter your PIN:
-    &gt; 9707
+    &gt; 4325
 
     You have successfully logged in!
 
@@ -1029,15 +1035,12 @@ feedback:
     4. Close account
     5. Log out
     0. Exit
-    &gt; 2
+    &gt; 3
 
-    You have successfully logged out!
+    Transfer
+    Enter card number:
+    &gt; 2000007269641764
 
-    1. Create an account
-    2. Log into account
-    0. Exit
-    &gt; 10000
-    &gt; 0
-    Bye!
-  time: Sat, 28 May 2022 18:50:53 UTC
+    Enter how much money you want to transfer:
+  time: Sat, 28 May 2022 23:10:41 UTC
 record: 4

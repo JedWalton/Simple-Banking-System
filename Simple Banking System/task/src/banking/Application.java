@@ -7,12 +7,18 @@ public class Application {
     Database database;
     boolean loginStatus;
     int currentState;
+
+    long currentlyActiveCardNumber;
+    int currentlyActivePinNumber;
+
     public Application(String[] args) {
         this.database = new Database(args);
         loginStatus = false;
         currentState = 0;
         menuLoopEntryPoint();
     }
+
+
 
     /* This loop ends only by System.exit */
     public void menuLoopEntryPoint() {
@@ -64,13 +70,18 @@ public class Application {
 
         if (database.isLoginValid(cardNum, pinNum)) {
             System.out.println("\nYou have successfully logged in!\n");
+            currentlyActiveCardNumber = cardNum;
+            currentlyActivePinNumber = pinNum;
             return true;
         } else {
             System.out.println("\nWrong card number or PIN!\n");
             return false;
         }
     }
+
     private void LogOutOfAccount() {
+        currentlyActiveCardNumber = 0;
+        currentlyActivePinNumber = 0;
         System.out.println("\nYou have successfully logged out!\n");
     }
 
@@ -96,12 +107,20 @@ public class Application {
 
     public int menuTwoLogic() {
         Menu.displayCustomerAccountLoggedInView();
-        int menuOption = Menu.getInput_createAccount_Login_Menu();
+        int menuOption = Menu.getInput_displayCustomerAccountLoggedInView();
         if (menuOption == 1) {
             getBalance();
             /* Stay on login page */
             return 1;
         } else if (menuOption == 2) {
+            addIncome();
+            return 1;
+        } else if (menuOption == 3) {
+            doTransfer();
+            return 1;
+        } else if (menuOption == 4) {
+            return 1;
+        } else if (menuOption == 5) {
             LogOutOfAccount();
             /* Back to main menu */
             return 0;
@@ -111,6 +130,28 @@ public class Application {
         }
         /* stay on same menu */
         return 1;
+    }
+
+    private void doTransfer() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nTransfer");
+        System.out.println("Enter card number:");
+        long cardNum = scanner.nextLong();
+
+        System.out.println("\nEnter how much money you want to transfer:");
+        long money = scanner.nextLong();
+
+        /* Do the transfer */
+    }
+
+    private void addIncome() {
+        /* get user input income as long */
+        Scanner scanner = new Scanner(System.in);
+        long income = scanner.nextLong();
+        /* call database function */
+        if (database.addIncomeToAccount(currentlyActiveCardNumber, currentlyActivePinNumber, income)) {
+            System.out.println("\nIncome was added!");
+        }
     }
 
     private void getBalance() {

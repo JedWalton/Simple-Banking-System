@@ -31,4 +31,14 @@ public class Menu {
         return userin;
     }
 
+    public static int getInput_displayCustomerAccountLoggedInView() {
+        Scanner scanner = new Scanner(System.in);
+
+        int userin = scanner.nextInt();
+        while (userin != 0 && userin != 1 && userin != 2 && userin != 3 && userin != 4 && userin != 5) {
+            userin = scanner.nextInt();
+        }
+        return userin;
+    }
+
 }
