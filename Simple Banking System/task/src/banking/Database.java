@@ -1,22 +1,19 @@
-package banking.connect;
+package banking;
 
-
-import banking.account.CustomerAccount;
 import org.sqlite.SQLiteDataSource;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Connect {
+public class Database {
 
     String url;
     SQLiteDataSource dataSource;
     Connection conn;
     String[] args;
 
-    public Connect(String[] args) {
+    public Database(String[] args) {
         /* db parameters and config */
         this.url = "jdbc:sqlite:".concat(args[1]);
         this.dataSource = new SQLiteDataSource();
@@ -43,10 +40,10 @@ public class Connect {
         }
     }
 
-    public void saveNewlyCreatedCard(CustomerAccount customerAccount) {
+    public void saveNewlyCreatedCard(long cardNumber, int pinNum) {
         String query = "INSERT INTO card (number, pin) " +
-                "VALUES (".concat(String.valueOf(customerAccount.getCardNumber()))
-                        .concat(", ").concat(String.valueOf(customerAccount.getPinNumber()))
+                "VALUES (".concat(String.valueOf(cardNumber))
+                        .concat(", ").concat(String.valueOf(pinNum))
                         .concat(");");
         try (Connection con = this.dataSource.getConnection()) {
             try (Statement statement = con.createStatement()) {
@@ -57,6 +54,25 @@ public class Connect {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean doesCardAlreadyExist(long cardNum) {
+        String query = "SELECT number FROM card WHERE number = ".concat(String.valueOf(cardNum));
+        try (Connection con = this.dataSource.getConnection()) {
+            try (Statement statement = con.createStatement()) {
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()) {
+                    if(!(rs.getString("number").isEmpty())) {
+                        return true;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean isLoginValid(Long cardNum, int pinNum) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-28T16:26:15" hostname="PC" time="0.325">
+<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-28T17:10:05" hostname="PC" time="0.333">
   <properties/>
-  <testcase name="start" classname="SimpleBankSystemTest" time="0.325"/>
+  <testcase name="start" classname="SimpleBankSystemTest" time="0.333"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 1. Create an account
@@ -36,59 +36,59 @@ Start test 5?[0m
 2. Log into account
 0. Exit
 > 1
-4000006587476051
-2952
+4000002515295531
+5449
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000007956322751
-5582
+4000007957210161
+6989
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000003829989181
-6587
+4000008160142621
+1465
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000002141596641
-4210
+4000006112754931
+1176
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000007265475381
-9354
+4000009765506111
+3714
 1. Create an account
 2. Log into account
 0. Exit
 > 0
 Bye!
-4000006587476051
-4000007956322751
-4000003829989181
-4000002141596641
-4000007265475381
+4000002515295531
+4000007957210161
+4000008160142621
+4000006112754931
+4000009765506111
 ?[1;31m
 Start test 6?[0m
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000007140054831
-8142
+4000007608361801
+7286
 1. Create an account
 2. Log into account
 0. Exit
 > 2
 
 Enter your card number:
->> 4000007140054831
+>> 4000007608361801
 Enter your PIN:
-> 8142
+> 7286
 
 You have successfully logged in!
 
@@ -103,17 +103,17 @@ Start test 7?[0m
 2. Log into account
 0. Exit
 > 1
-4000008279807551
-8204
+4000002058306091
+9377
 1. Create an account
 2. Log into account
 0. Exit
 > 2
 
 Enter your card number:
->> 4000008279807551
+>> 4000002058306091
 Enter your PIN:
-> 2179
+> 8584
 
 Wrong card number or PIN!
 
@@ -128,17 +128,17 @@ Start test 8?[0m
 2. Log into account
 0. Exit
 > 1
-4000007918329571
-4843
+4000003462524261
+3974
 1. Create an account
 2. Log into account
 0. Exit
 > 2
 
 Enter your card number:
->> 400000734695079
+>> 400000841369953
 Enter your PIN:
-> 4843
+> 3974
 
 Wrong card number or PIN!
 
@@ -153,17 +153,17 @@ Start test 9?[0m
 2. Log into account
 0. Exit
 > 1
-4000008586043981
-8446
+4000005140284481
+9386
 1. Create an account
 2. Log into account
 0. Exit
 > 2
 
 Enter your card number:
->> 4000008586043981
+>> 4000005140284481
 Enter your PIN:
-> 8446
+> 9386
 
 You have successfully logged in!
 

@@ -1,18 +1,14 @@
 package banking;
 
-import banking.account.CustomerAccount;
-import banking.connect.Connect;
-
-import java.util.Random;
 import java.util.Scanner;
 
-public class Application extends Repository {
+public class Application {
 
-    Connect connect;
+    Database database;
     boolean loginStatus;
     int currentState;
     public Application(String[] args) {
-        this.connect = new Connect(args);
+        this.database = new Database(args);
         loginStatus = false;
         currentState = 0;
         menuLoopEntryPoint();
@@ -29,90 +25,33 @@ public class Application extends Repository {
         }
     }
 
-    public void displayCustomerAccountLoggedInView() {
-        System.out.println("1. Balance");
-        System.out.println("2. Log out");
-        System.out.println("0. Exit");
-    }
-
-    public int getMenuOption_ZeroToTwoInclusive() {
-        Scanner scanner = new Scanner(System.in);
-
-        int userin = scanner.nextInt();
-        while (userin != 0 && userin != 1 && userin != 2) {
-            userin = scanner.nextInt();
-        }
-        return userin;
-    }
-
-    public void display_createAccount_Login_Menu() {
-        System.out.println("1. Create an account");
-        System.out.println("2. Log into account");
-        System.out.println("0. Exit");
-    }
-
     /* recursive solution */
     public String generateCustomerAccount() {
-        Random rnd = new Random();
-        /* Generates pin numbers */
-        int pinGen = 1000 + rnd.nextInt(9000 - 1);
-        long numberGen = (100000000L + rnd.nextLong(900000000L));
-        String bin = "400000";
-        String cardNumberGenString = String.valueOf(numberGen);
-        String checksum = "1";
-        long cardNumberGen = Long.parseLong(bin.concat(cardNumberGenString).concat(checksum));
 
-        while (!passesLuhnsAlgorithm(cardNumberGen)) {
-            pinGen = 1000 + rnd.nextInt(9000 - 1);
-            numberGen = (100000000L + rnd.nextLong(900000000L));
-            bin = "400000";
-            cardNumberGenString = String.valueOf(numberGen);
-            checksum = "1";
-            cardNumberGen = Long.parseLong(bin.concat(cardNumberGenString).concat(checksum));
+        /* Generates pin numbers */
+        int pinGen = Util.generatePin();
+        long cardNumberGen = Util.generateCardNum();
+
+        while (!Util.passesLuhnsAlgorithm(cardNumberGen)) {
+            pinGen = Util.generatePin();
+            cardNumberGen = Util.generateCardNum();
         }
         System.out.println(cardNumberGen);
         System.out.println(pinGen);
 
-        long finalCardNumberGen = cardNumberGen;
-
-        /* To be replaced with SQLite query */
-        if (super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x == finalCardNumberGen)) {
+        /* To prevent collisions */
+        if (database.doesCardAlreadyExist(cardNumberGen)) {
             generateCustomerAccount();
         }
         /* Condition must only be reached if account does not already exist by card number */
-
-        /* To be replaced with SQLite query */
-//        super.customerAccounts.add(new CustomerAccount(cardNumberGen, pinGen));
-        this.connect.saveNewlyCreatedCard(new CustomerAccount(cardNumberGen, pinGen));
-
+        this.database.saveNewlyCreatedCard(cardNumberGen, pinGen);
 
         return "\nYour card has been created\n" +
                 "Your card number:\n" +
-                finalCardNumberGen +
+                cardNumberGen +
                 "\nYour card PIN:\n" +
                 pinGen +
                 "\n";
-    }
-
-    public boolean passesLuhnsAlgorithm(long cardNumberGen) {
-        String ccNumber = String.valueOf(cardNumberGen);
-        int sum = 0;
-        boolean alternate = false;
-        for (int i = ccNumber.length() - 1; i >= 0; i--)
-        {
-            long n = Long.parseLong(ccNumber.substring(i, i + 1));
-            if (alternate)
-            {
-                n *= 2;
-                if (n > 9)
-                {
-                    n = (n % 10) + 1;
-                }
-            }
-            sum += n;
-            alternate = !alternate;
-        }
-        return (sum % 10 == 0);
     }
 
     public boolean LogIntoAccount() {
@@ -124,13 +63,7 @@ public class Application extends Repository {
         int pinNum = scanner.nextInt();
 
 
-        /* To be replaced with SQLite query */
-
-//        if (super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x.equals(cardNum)) &&
-//                (super.customerAccounts.stream().map(CustomerAccount::getPinNumber)
-//                        .anyMatch(x -> x.equals(pinNum)))) {
-        if (connect.isLoginValid(cardNum, pinNum)) {
-
+        if (database.isLoginValid(cardNum, pinNum)) {
             System.out.println("\nYou have successfully logged in!\n");
             return true;
         } else {
@@ -143,8 +76,8 @@ public class Application extends Repository {
     }
 
     public int menuOneLogic() {
-        display_createAccount_Login_Menu();
-        int menuOption = getMenuOption_ZeroToTwoInclusive();
+        Menu.display_createAccount_Login_Menu();
+        int menuOption = Menu.getMenuOption_ZeroToTwoInclusive();
         boolean loginStatus = false;
         if (menuOption == 1) {
             generateCustomerAccount();
@@ -163,8 +96,8 @@ public class Application extends Repository {
     }
 
     public int menuTwoLogic() {
-        displayCustomerAccountLoggedInView();
-        int menuOption = getMenuOption_ZeroToTwoInclusive();
+        Menu.displayCustomerAccountLoggedInView();
+        int menuOption = Menu.getMenuOption_ZeroToTwoInclusive();
         if (menuOption == 1) {
             getBalance();
             /* Stay on login page */
