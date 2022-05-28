@@ -95,11 +95,4 @@ public class Database {
         }
         return false;
     }
-//
-//        if (/*Query for card exist*/) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 }

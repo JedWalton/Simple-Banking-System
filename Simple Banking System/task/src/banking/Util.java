@@ -20,7 +20,6 @@ public class Util {
         return Long.parseLong(bin.concat(cardNumberGenString).concat(checksum));
     }
 
-
     public static boolean passesLuhnsAlgorithm(long cardNumberGen) {
         String ccNumber = String.valueOf(cardNumberGen);
         int sum = 0;

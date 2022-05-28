@@ -27,7 +27,6 @@ public class Application {
 
     /* recursive solution */
     public String generateCustomerAccount() {
-
         /* Generates pin numbers */
         int pinGen = Util.generatePin();
         long cardNumberGen = Util.generateCardNum();
@@ -36,6 +35,7 @@ public class Application {
             pinGen = Util.generatePin();
             cardNumberGen = Util.generateCardNum();
         }
+
         System.out.println(cardNumberGen);
         System.out.println(pinGen);
 
