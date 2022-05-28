@@ -25,7 +25,6 @@ public class Application {
         }
     }
 
-    /* recursive solution */
     public String generateCustomerAccount() {
         /* Generates pin numbers */
         int pinGen = Util.generatePin();
@@ -39,7 +38,7 @@ public class Application {
         System.out.println(cardNumberGen);
         System.out.println(pinGen);
 
-        /* To prevent collisions */
+        /* Recurse to prevent collisions */
         if (database.doesCardAlreadyExist(cardNumberGen)) {
             generateCustomerAccount();
         }
