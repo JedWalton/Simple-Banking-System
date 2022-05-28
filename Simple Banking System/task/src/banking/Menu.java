@@ -21,7 +21,7 @@ public class Menu {
         System.out.println("0. Exit");
     }
 
-    public static int getMenuOption_ZeroToTwoInclusive() {
+    public static int getInput_createAccount_Login_Menu() {
         Scanner scanner = new Scanner(System.in);
 
         int userin = scanner.nextInt();

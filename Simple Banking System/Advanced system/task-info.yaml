@@ -677,6 +677,367 @@ files:
         }
     }
   learner_created: false
+- name: src/banking/Application.java
+  visible: true
+  text: |+
+    package banking;
+
+    import java.util.Scanner;
+
+    public class Application {
+
+        Database database;
+        boolean loginStatus;
+        int currentState;
+        public Application(String[] args) {
+            this.database = new Database(args);
+            loginStatus = false;
+            currentState = 0;
+            menuLoopEntryPoint();
+        }
+
+        /* This loop ends only by System.exit */
+        public void menuLoopEntryPoint() {
+            while (true) {
+                if (currentState == 0) {
+                    currentState = menuOneLogic();
+                } else if (currentState == 1) {
+                    currentState = menuTwoLogic();
+                }
+            }
+        }
+
+        public String generateCustomerAccount() {
+            /* Generates pin numbers */
+            int pinGen = Util.generatePin();
+            long cardNumberGen = Util.generateCardNum();
+
+            while (!Util.passesLuhnsAlgorithm(cardNumberGen)) {
+                pinGen = Util.generatePin();
+                cardNumberGen = Util.generateCardNum();
+            }
+
+            System.out.println(cardNumberGen);
+            System.out.println(pinGen);
+
+            /* Recurse to prevent collisions */
+            if (database.doesCardAlreadyExist(cardNumberGen)) {
+                generateCustomerAccount();
+            }
+            /* Condition must only be reached if account does not already exist by card number */
+            this.database.saveNewlyCreatedCard(cardNumberGen, pinGen);
+
+            return "\nYour card has been created\n" +
+                    "Your card number:\n" +
+                    cardNumberGen +
+                    "\nYour card PIN:\n" +
+                    pinGen +
+                    "\n";
+        }
+
+        public boolean LogIntoAccount() {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("\nEnter your card number:");
+            System.out.print(">");
+            long cardNum = scanner.nextLong();
+            System.out.println("Enter your PIN:");
+            int pinNum = scanner.nextInt();
+
+
+            if (database.isLoginValid(cardNum, pinNum)) {
+                System.out.println("\nYou have successfully logged in!\n");
+                return true;
+            } else {
+                System.out.println("\nWrong card number or PIN!\n");
+                return false;
+            }
+        }
+        private void LogOutOfAccount() {
+            System.out.println("\nYou have successfully logged out!\n");
+        }
+
+        public int menuOneLogic() {
+            Menu.display_createAccount_Login_Menu();
+            int menuOption = Menu.getInput_createAccount_Login_Menu();
+            boolean loginStatus = false;
+            if (menuOption == 1) {
+                generateCustomerAccount();
+                return 0;
+            } else if (menuOption == 2) {
+                loginStatus = LogIntoAccount();
+                if (loginStatus) {
+                    return 1;
+                }
+            } else if (menuOption == 0) {
+                System.out.println("Bye!");
+                System.exit(1);
+            }
+            /* stay on same menu */
+            return 0;
+        }
+
+        public int menuTwoLogic() {
+            Menu.displayCustomerAccountLoggedInView();
+            int menuOption = Menu.getInput_createAccount_Login_Menu();
+            if (menuOption == 1) {
+                getBalance();
+                /* Stay on login page */
+                return 1;
+            } else if (menuOption == 2) {
+                LogOutOfAccount();
+                /* Back to main menu */
+                return 0;
+            } else if (menuOption == 0) {
+                System.out.println("Bye!");
+                System.exit(1);
+            }
+            /* stay on same menu */
+            return 1;
+        }
+
+        private void getBalance() {
+            System.out.println("\nBalance: 0\n");
+        }
+    }
+
+
+  learner_created: true
+- name: src/banking/Util.java
+  visible: true
+  text: |
+    package banking;
+
+    import java.util.Random;
+
+    public class Util {
+        private Util() {
+        }
+
+        public static int generatePin() {
+            Random random = new Random();
+            return 1000 + random.nextInt(9000 - 1);
+        }
+
+        public static long generateCardNum() {
+            Random random = new Random();
+            long numberGen = (100000000L + random.nextLong(900000000L));
+            String bin = "400000";
+            String cardNumberGenString = String.valueOf(numberGen);
+            String checksum = "1";
+            return Long.parseLong(bin.concat(cardNumberGenString).concat(checksum));
+        }
+
+        public static boolean passesLuhnsAlgorithm(long cardNumberGen) {
+            String ccNumber = String.valueOf(cardNumberGen);
+            int sum = 0;
+            boolean alternate = false;
+            for (int i = ccNumber.length() - 1; i >= 0; i--) {
+                long n = Long.parseLong(ccNumber.substring(i, i + 1));
+                if (alternate) {
+                    n *= 2;
+                    if (n > 9) {
+                        n = (n % 10) + 1;
+                    }
+                }
+                sum += n;
+                alternate = !alternate;
+            }
+            return (sum % 10 == 0);
+        }
+    }
+  learner_created: true
+- name: src/banking/Menu.java
+  visible: true
+  text: |
+    package banking;
+
+    import java.util.Scanner;
+
+    public class Menu {
+        private Menu() {
+        }
+
+        public static void display_createAccount_Login_Menu() {
+            System.out.println("1. Create an account");
+            System.out.println("2. Log into account");
+            System.out.println("0. Exit");
+        }
+
+        public static void displayCustomerAccountLoggedInView() {
+            System.out.println("1. Balance");
+            System.out.println("2. Add income");
+            System.out.println("3. Do transfer");
+            System.out.println("4. Close account");
+            System.out.println("5. Log out");
+            System.out.println("0. Exit");
+        }
+
+        public static int getInput_createAccount_Login_Menu() {
+            Scanner scanner = new Scanner(System.in);
+
+            int userin = scanner.nextInt();
+            while (userin != 0 && userin != 1 && userin != 2) {
+                userin = scanner.nextInt();
+            }
+            return userin;
+        }
+
+    }
+  learner_created: true
+- name: src/banking/Database.java
+  visible: true
+  text: |-
+    package banking;
+
+    import org.sqlite.SQLiteDataSource;
+    import java.sql.Connection;
+    import java.sql.ResultSet;
+    import java.sql.SQLException;
+    import java.sql.Statement;
+
+    public class Database {
+
+        String url;
+        SQLiteDataSource dataSource;
+        Connection conn;
+        String[] args;
+
+        public Database(String[] args) {
+            /* db parameters and config */
+            this.url = "jdbc:sqlite:".concat(args[1]);
+            this.dataSource = new SQLiteDataSource();
+            this.dataSource.setUrl(url);
+
+            initTable_card();
+        }
+
+        public void initTable_card() {
+            try (Connection con = this.dataSource.getConnection()) {
+                // Statement creation
+                try (Statement statement = con.createStatement()) {
+                    // Statement execution
+                    statement.executeUpdate("CREATE TABLE IF NOT EXISTS card (" +
+                            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                            "number TEXT," +
+                            "pin TEXT," +
+                            "balance INTEGER DEFAULT 0)");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void saveNewlyCreatedCard(long cardNumber, int pinNum) {
+            String query = "INSERT INTO card (number, pin) " +
+                    "VALUES (".concat(String.valueOf(cardNumber))
+                            .concat(", ").concat(String.valueOf(pinNum))
+                            .concat(");");
+            try (Connection con = this.dataSource.getConnection()) {
+                try (Statement statement = con.createStatement()) {
+                    statement.executeUpdate(query);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public boolean doesCardAlreadyExist(long cardNum) {
+            String query = "SELECT number FROM card WHERE number = ".concat(String.valueOf(cardNum));
+            try (Connection con = this.dataSource.getConnection()) {
+                try (Statement statement = con.createStatement()) {
+                    ResultSet rs = statement.executeQuery(query);
+                    while (rs.next()) {
+                        if(!(rs.getString("number").isEmpty())) {
+                            return true;
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public boolean isLoginValid(Long cardNum, int pinNum) {
+            String query = "SELECT number, pin FROM card WHERE number = ".concat(String.valueOf(cardNum)) +
+                    " AND pin = ".concat(String.valueOf(pinNum)).concat(";");
+            try (Connection con = this.dataSource.getConnection()) {
+                try (Statement statement = con.createStatement()) {
+                    ResultSet rs = statement.executeQuery(query);
+                    while (rs.next()) {
+                        if(!(rs.getString("number").isEmpty() ||
+                                rs.getString("pin").isEmpty())) {
+                           return true;
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+    }
+  learner_created: true
+- name: card.s3db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/8428#comment
-status: Unchecked
-record: -1
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #10
+
+    Account balance int the database is wrong after adding income.
+    Expected 10000
+
+    Please find below the output of your program during this failed test.
+    Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
+
+    ---
+
+    Arguments: -fileName card.s3db
+
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 1
+    4000009456358111
+    9707
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 2
+
+    Enter your card number:
+    &gt;&gt; 4000009456358111
+    Enter your PIN:
+    &gt; 9707
+
+    You have successfully logged in!
+
+    1. Balance
+    2. Add income
+    3. Do transfer
+    4. Close account
+    5. Log out
+    0. Exit
+    &gt; 2
+
+    You have successfully logged out!
+
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 10000
+    &gt; 0
+    Bye!
+  time: Sat, 28 May 2022 18:50:53 UTC
+record: 4

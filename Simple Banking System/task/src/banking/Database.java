@@ -10,8 +10,6 @@ public class Database {
 
     String url;
     SQLiteDataSource dataSource;
-    Connection conn;
-    String[] args;
 
     public Database(String[] args) {
         /* db parameters and config */

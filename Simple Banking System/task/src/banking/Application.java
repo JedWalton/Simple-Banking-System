@@ -76,7 +76,7 @@ public class Application {
 
     public int menuOneLogic() {
         Menu.display_createAccount_Login_Menu();
-        int menuOption = Menu.getMenuOption_ZeroToTwoInclusive();
+        int menuOption = Menu.getInput_createAccount_Login_Menu();
         boolean loginStatus = false;
         if (menuOption == 1) {
             generateCustomerAccount();
@@ -96,7 +96,7 @@ public class Application {
 
     public int menuTwoLogic() {
         Menu.displayCustomerAccountLoggedInView();
-        int menuOption = Menu.getMenuOption_ZeroToTwoInclusive();
+        int menuOption = Menu.getInput_createAccount_Login_Menu();
         if (menuOption == 1) {
             getBalance();
             /* Stay on login page */
