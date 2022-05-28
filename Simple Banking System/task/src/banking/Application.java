@@ -45,7 +45,7 @@ public class Application {
         System.out.println(pinGen);
 
         /* Recurse to prevent collisions */
-        if (database.doesCardAlreadyExist(cardNumberGen)) {
+        if (database.doesCardExist(cardNumberGen)) {
             generateCustomerAccount();
         }
         /* Condition must only be reached if account does not already exist by card number */
@@ -136,11 +136,22 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nTransfer");
         System.out.println("Enter card number:");
-        long cardNum = scanner.nextLong();
+        long cardNumToTransferTo = scanner.nextLong();
+        if (!Util.passesLuhnsAlgorithm(cardNumToTransferTo))  {
+            System.out.println("Probably you made a mistake in the card number. Please try again!");
+        } else if (!database.doesCardExist(cardNumToTransferTo)) {
+            System.out.println("Such a card does not exist.");
+        } else {
+            System.out.println("\nEnter how much money you want to transfer:");
+            long amountToTransfer = scanner.nextLong();
+            if(database.getBalance(currentlyActiveCardNumber, currentlyActivePinNumber) > amountToTransfer) {
+                database.transfer(amountToTransfer, cardNumToTransferTo);
+            } else {
+                System.out.println("Not enough money!");
+            }
 
-        System.out.println("\nEnter how much money you want to transfer:");
-        long money = scanner.nextLong();
 
+        }
         /* Do the transfer */
     }
 

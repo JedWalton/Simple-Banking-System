@@ -55,7 +55,7 @@ public class Database {
         }
     }
 
-    public boolean doesCardAlreadyExist(long cardNum) {
+    public boolean doesCardExist(long cardNum) {
         String query = "SELECT number FROM card WHERE number = ".concat(String.valueOf(cardNum));
         try (Connection con = this.dataSource.getConnection()) {
             try (Statement statement = con.createStatement()) {
@@ -128,5 +128,10 @@ public class Database {
             e.printStackTrace();
         }
         throw new RuntimeException("Balance not found error. Did you enter card and pin correctly?");
+    }
+
+    public boolean transfer(long amountToTransfer, long cardNumToTransferTo) {
+
+        return false;
     }
 }
