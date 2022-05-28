@@ -7,7 +7,7 @@ public class Main {
         try {
             application = new Application(args);
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Invalid args, Expected Filename to be passed.");
         }
     }
 }

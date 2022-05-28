@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-05-28T14:36:30" hostname="PC" time="0.186">
+<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-05-28T15:45:47" hostname="PC" time="0.248">
   <properties/>
-  <testcase name="start" classname="SimpleBankSystemTest" time="0.186">
-    <failure message="java.lang.AssertionError: Wrong answer in test #5&#10;&#10;Your database doesn't save newly created cards.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Arguments: -fileName card.s3db&#10;&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000006132728501&#10;8862&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000009115072871&#10;3246&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000006366802071&#10;7946&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000003875422541&#10;2223&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000002952843561&#10;8955&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 0&#10;Bye!" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #5
+  <testcase name="start" classname="SimpleBankSystemTest" time="0.248">
+    <failure message="java.lang.AssertionError: Wrong answer in test #6&#10;&#10;The user should be signed in after entering the correct card information.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Arguments: -fileName card.s3db&#10;&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000005501625561&#10;4162&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 2&#10;&#10;Enter your card number:&#10;&gt;&gt; 4000005501625561&#10;Enter your PIN:&#10;&gt; 4162&#10;&#10;Wrong card number or PIN!&#10;&#10;1. Create an account&#10;2. Log into account&#10;0. Exit" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #6
 
-Your database doesn't save newly created cards.
+The user should be signed in after entering the correct card information.
 
 Please find below the output of your program during this failed test.
 Note that the '&gt;' character indicates the beginning of the input line.
@@ -17,37 +17,23 @@ Arguments: -fileName card.s3db
 2. Log into account
 0. Exit
 &gt; 1
-4000006132728501
-8862
+4000005501625561
+4162
 1. Create an account
 2. Log into account
 0. Exit
-&gt; 1
-4000009115072871
-3246
+&gt; 2
+
+Enter your card number:
+&gt;&gt; 4000005501625561
+Enter your PIN:
+&gt; 4162
+
+Wrong card number or PIN!
+
 1. Create an account
 2. Log into account
 0. Exit
-&gt; 1
-4000006366802071
-7946
-1. Create an account
-2. Log into account
-0. Exit
-&gt; 1
-4000003875422541
-2223
-1. Create an account
-2. Log into account
-0. Exit
-&gt; 1
-4000002952843561
-8955
-1. Create an account
-2. Log into account
-0. Exit
-&gt; 0
-Bye!
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:155)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -128,37 +114,65 @@ Start test 5?[0m
 2. Log into account
 0. Exit
 > 1
-4000006132728501
-8862
+4000002995681721
+9471
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000009115072871
-3246
+4000008106273191
+6543
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000006366802071
-7946
+4000008088308031
+2940
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000003875422541
-2223
+4000001463721951
+9120
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000002952843561
-8955
+4000002230720151
+4392
 1. Create an account
 2. Log into account
 0. Exit
 > 0
 Bye!
+4000002995681721
+4000008106273191
+4000008088308031
+4000001463721951
+4000002230720151
+?[1;31m
+Start test 6?[0m
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000005501625561
+4162
+1. Create an account
+2. Log into account
+0. Exit
+> 2
+
+Enter your card number:
+>> 4000005501625561
+Enter your PIN:
+> 4162
+
+Wrong card number or PIN!
+
+1. Create an account
+2. Log into account
+0. Exit
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

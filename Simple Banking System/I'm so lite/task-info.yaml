@@ -704,9 +704,9 @@ feedback_link: https://hyperskill.org/learn/step/8427#comment
 status: Failed
 feedback:
   message: |-
-    Wrong answer in test #5
+    Wrong answer in test #6
 
-    Your database doesn&#39;t save newly created cards.
+    The user should be signed in after entering the correct card information.
 
     Please find below the output of your program during this failed test.
     Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
@@ -719,36 +719,22 @@ feedback:
     2. Log into account
     0. Exit
     &gt; 1
-    4000006132728501
-    8862
+    4000005501625561
+    4162
     1. Create an account
     2. Log into account
     0. Exit
-    &gt; 1
-    4000009115072871
-    3246
+    &gt; 2
+
+    Enter your card number:
+    &gt;&gt; 4000005501625561
+    Enter your PIN:
+    &gt; 4162
+
+    Wrong card number or PIN!
+
     1. Create an account
     2. Log into account
     0. Exit
-    &gt; 1
-    4000006366802071
-    7946
-    1. Create an account
-    2. Log into account
-    0. Exit
-    &gt; 1
-    4000003875422541
-    2223
-    1. Create an account
-    2. Log into account
-    0. Exit
-    &gt; 1
-    4000002952843561
-    8955
-    1. Create an account
-    2. Log into account
-    0. Exit
-    &gt; 0
-    Bye!
-  time: Sat, 28 May 2022 14:36:30 UTC
+  time: Sat, 28 May 2022 15:45:47 UTC
 record: -1

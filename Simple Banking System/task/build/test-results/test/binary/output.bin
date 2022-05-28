@@ -32,34 +32,62 @@
 2. Log into account
 0. Exit
 > 1
-4000006132728501
-8862
+4000002995681721
+9471
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000009115072871
-3246
+4000008106273191
+6543
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000006366802071
-7946
+4000008088308031
+2940
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000003875422541
-2223
+4000001463721951
+9120
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000002952843561
-8955
+4000002230720151
+4392
 1. Create an account
 2. Log into account
 0. Exit
 > 0
 Bye!
+4000002995681721
+4000008106273191
+4000008088308031
+4000001463721951
+4000002230720151
+[1;31m
+Start test 6[0m
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000005501625561
+4162
+1. Create an account
+2. Log into account
+0. Exit
+> 2
+
+Enter your card number:
+>> 4000005501625561
+Enter your PIN:
+> 4162
+
+Wrong card number or PIN!
+
+1. Create an account
+2. Log into account
+0. Exit

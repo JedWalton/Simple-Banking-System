@@ -30,7 +30,7 @@ public class Connect {
             try (Statement statement = con.createStatement()) {
                 // Statement execution
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS card (" +
-                        "id INTEGER," +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "number TEXT," +
                         "pin TEXT," +
                         "balance INTEGER DEFAULT 0)");
@@ -43,11 +43,15 @@ public class Connect {
     }
 
     public void saveNewlyCreatedCard(CustomerAccount customerAccount) {
+        String query = "INSERT INTO card (number, pin) " +
+                "VALUES (".concat(String.valueOf(customerAccount.getCardNumber()))
+                        .concat(", ").concat(String.valueOf(customerAccount.getPinNumber()))
+                        .concat(");");
         try (Connection con = this.dataSource.getConnection()) {
 //            Statement creation
             try (Statement statement = con.createStatement()) {
 //                Statement execution
-//                statement.executeUpdate("SELECT TABLE IF NOT EXISTS card (" +
+                statement.executeUpdate(query);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
