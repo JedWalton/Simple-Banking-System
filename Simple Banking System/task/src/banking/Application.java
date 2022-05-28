@@ -125,10 +125,11 @@ public class Application extends Repository {
 
 
         /* To be replaced with SQLite query */
-        if (super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x.equals(cardNum)) &&
-                (super.customerAccounts.stream().map(CustomerAccount::getPinNumber)
-                        .anyMatch(x -> x.equals(pinNum)))) {
 
+//        if (super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x.equals(cardNum)) &&
+//                (super.customerAccounts.stream().map(CustomerAccount::getPinNumber)
+//                        .anyMatch(x -> x.equals(pinNum)))) {
+        if (connect.isLoginValid(cardNum, pinNum)) {
 
             System.out.println("\nYou have successfully logged in!\n");
             return true;

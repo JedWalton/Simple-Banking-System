@@ -5,6 +5,7 @@ import banking.account.CustomerAccount;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -48,9 +49,7 @@ public class Connect {
                         .concat(", ").concat(String.valueOf(customerAccount.getPinNumber()))
                         .concat(");");
         try (Connection con = this.dataSource.getConnection()) {
-//            Statement creation
             try (Statement statement = con.createStatement()) {
-//                Statement execution
                 statement.executeUpdate(query);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -58,25 +57,28 @@ public class Connect {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    /* RETURN TO AFTER ADDING NEW CARDS */
-
-//    public boolean doesCardAlreadyExist(Long cardNumber) {
-//
-//        try (Connection con = this.dataSource.getConnection()) {
-//             Statement creation
-//            try (Statement statement = con.createStatement()) {
-//                 Statement execution
-//                statement.executeUpdate("SELECT TABLE IF NOT EXISTS card (" +
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
+    public boolean isLoginValid(Long cardNum, int pinNum) {
+        String query = "SELECT number, pin FROM card WHERE number = ".concat(String.valueOf(cardNum)) +
+                " AND pin = ".concat(String.valueOf(pinNum)).concat(";");
+        try (Connection con = this.dataSource.getConnection()) {
+            try (Statement statement = con.createStatement()) {
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()) {
+                    if(!(rs.getString("number").isEmpty() ||
+                            rs.getString("pin").isEmpty())) {
+                       return true;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 //
 //        if (/*Query for card exist*/) {
 //            return true;
