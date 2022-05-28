@@ -1,15 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-05-28T11:21:09" hostname="PC" time="0.041">
+<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-05-28T13:05:14" hostname="PC" time="0.176">
   <properties/>
-  <testcase name="start" classname="SimpleBankSystemTest" time="0.041">
-    <failure message="java.lang.AssertionError: Exception in test #1&#10;&#10;java.lang.NullPointerException: Cannot load from object array because &quot;this.args&quot; is null&#10;&#9;at banking.menu.Repository.&lt;init&gt;(Repository.java:22)&#10;&#9;at banking.menu.MenuWithCustomerAccountStorage.&lt;init&gt;(MenuWithCustomerAccountStorage.java:10)&#10;&#9;at banking.Main.main(Main.java:7)&#10;&#10;Arguments: -fileName card.s3db" type="java.lang.AssertionError">java.lang.AssertionError: Exception in test #1
+  <testcase name="start" classname="SimpleBankSystemTest" time="0.176">
+    <failure message="java.lang.AssertionError: Wrong answer in test #5&#10;&#10;Your database doesn't save newly created cards.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Arguments: -fileName card.s3db&#10;&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000004357054901&#10;1162&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000002016917351&#10;1825&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000001683966501&#10;6171&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000008680856031&#10;5773&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000009150342791&#10;7935&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 0&#10;Bye!" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #5
 
-java.lang.NullPointerException: Cannot load from object array because &quot;this.args&quot; is null
-	at banking.menu.Repository.&lt;init&gt;(Repository.java:22)
-	at banking.menu.MenuWithCustomerAccountStorage.&lt;init&gt;(MenuWithCustomerAccountStorage.java:10)
-	at banking.Main.main(Main.java:7)
+Your database doesn't save newly created cards.
+
+Please find below the output of your program during this failed test.
+Note that the '&gt;' character indicates the beginning of the input line.
+
+---
 
 Arguments: -fileName card.s3db
+
+1. Create an account
+2. Log into account
+0. Exit
+&gt; 1
+4000004357054901
+1162
+1. Create an account
+2. Log into account
+0. Exit
+&gt; 1
+4000002016917351
+1825
+1. Create an account
+2. Log into account
+0. Exit
+&gt; 1
+4000001683966501
+6171
+1. Create an account
+2. Log into account
+0. Exit
+&gt; 1
+4000008680856031
+5773
+1. Create an account
+2. Log into account
+0. Exit
+&gt; 1
+4000009150342791
+7935
+1. Create an account
+2. Log into account
+0. Exit
+&gt; 0
+Bye!
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:155)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -58,6 +96,69 @@ Arguments: -fileName card.s3db
   </testcase>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
+1. Create an account
+2. Log into account
+0. Exit
+> 0
+Bye!
+?[1;31m
+Start test 2?[0m
+1. Create an account
+2. Log into account
+0. Exit
+> 0
+Bye!
+?[1;31m
+Start test 3?[0m
+1. Create an account
+2. Log into account
+0. Exit
+> 0
+Bye!
+?[1;31m
+Start test 4?[0m
+1. Create an account
+2. Log into account
+0. Exit
+> 0
+Bye!
+?[1;31m
+Start test 5?[0m
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000004357054901
+1162
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000002016917351
+1825
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000001683966501
+6171
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000008680856031
+5773
+1. Create an account
+2. Log into account
+0. Exit
+> 1
+4000009150342791
+7935
+1. Create an account
+2. Log into account
+0. Exit
+> 0
+Bye!
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

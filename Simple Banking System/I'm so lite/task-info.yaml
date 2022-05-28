@@ -694,12 +694,61 @@ files:
         }
     }
   learner_created: true
+- name: card.s3db
+  visible: true
+  learner_created: true
+- name: src/banking/connect/Connect.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/8427#comment
 status: Failed
 feedback:
-  message: "Exception in test #1\n\njava.lang.NullPointerException: Cannot load from\
-    \ object array because &quot;this.args&quot; is null\n\tat banking.menu.Repository.&lt;init&gt;(Repository.java:22)\n\
-    \tat banking.menu.MenuWithCustomerAccountStorage.&lt;init&gt;(MenuWithCustomerAccountStorage.java:10)\n\
-    \tat banking.Main.main(Main.java:7)\n\nArguments: -fileName card.s3db"
-  time: Sat, 28 May 2022 11:21:09 UTC
+  message: |-
+    Wrong answer in test #5
+
+    Your database doesn&#39;t save newly created cards.
+
+    Please find below the output of your program during this failed test.
+    Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
+
+    ---
+
+    Arguments: -fileName card.s3db
+
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 1
+    4000004357054901
+    1162
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 1
+    4000002016917351
+    1825
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 1
+    4000001683966501
+    6171
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 1
+    4000008680856031
+    5773
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 1
+    4000009150342791
+    7935
+    1. Create an account
+    2. Log into account
+    0. Exit
+    &gt; 0
+    Bye!
+  time: Sat, 28 May 2022 13:05:14 UTC
 record: -1

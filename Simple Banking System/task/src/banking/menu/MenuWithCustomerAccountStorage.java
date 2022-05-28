@@ -7,10 +7,7 @@ import java.util.Scanner;
 
 public class MenuWithCustomerAccountStorage extends Repository {
 
-    public MenuWithCustomerAccountStorage(String[] args) {
-        if (args!=null){
-            this.args = args;
-        }
+    public MenuWithCustomerAccountStorage() {
     }
 
     public void displayCustomerAccountLoggedInView() {
