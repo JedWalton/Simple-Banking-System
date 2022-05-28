@@ -1,6 +1,7 @@
 package banking.connect;
 
 
+import banking.account.CustomerAccount;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.Connection;
@@ -12,8 +13,9 @@ public class Connect {
     String url;
     SQLiteDataSource dataSource;
     Connection conn;
+    String[] args;
 
-    public Connect(String[] args) {
+    public Connect() {
         /* db parameters and config */
         this.url = "jdbc:sqlite:".concat(args[1]);
         this.dataSource = new SQLiteDataSource();
@@ -39,4 +41,43 @@ public class Connect {
             e.printStackTrace();
         }
     }
+
+    public void saveNewlyCreatedCard(CustomerAccount customerAccount) {
+        try (Connection con = this.dataSource.getConnection()) {
+//            Statement creation
+            try (Statement statement = con.createStatement()) {
+//                Statement execution
+                statement.executeUpdate("SELECT TABLE IF NOT EXISTS card (" +
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /* RETURN TO AFTER ADDING NEW CARDS */
+
+//    public boolean doesCardAlreadyExist(Long cardNumber) {
+//
+//        try (Connection con = this.dataSource.getConnection()) {
+//             Statement creation
+//            try (Statement statement = con.createStatement()) {
+//                 Statement execution
+//                statement.executeUpdate("SELECT TABLE IF NOT EXISTS card (" +
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        if (/*Query for card exist*/) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }

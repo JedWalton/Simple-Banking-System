@@ -1,13 +1,14 @@
 package banking.menu;
 
 import banking.account.CustomerAccount;
+import banking.connect.Connect;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class MenuWithCustomerAccountStorage extends Repository {
+public class MenuWithCustomerAccountStorage extends Connect {
 
-    public MenuWithCustomerAccountStorage() {
+    public MenuWithCustomerAccountStorage(String[] args) {
     }
 
     public void displayCustomerAccountLoggedInView() {
@@ -32,6 +33,7 @@ public class MenuWithCustomerAccountStorage extends Repository {
         System.out.println("0. Exit");
     }
 
+    /* recursive solution */
     public String generateCustomerAccount() {
         Random rnd = new Random();
         /* Generates pin numbers */
@@ -54,9 +56,18 @@ public class MenuWithCustomerAccountStorage extends Repository {
         System.out.println(pinGen);
 
         long finalCardNumberGen = cardNumberGen;
-        if (!super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x == finalCardNumberGen)) {
-            super.customerAccounts.add(new CustomerAccount(cardNumberGen, pinGen));
+
+        /* To be replaced with SQLite query */
+        if (super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x == finalCardNumberGen)) {
+            generateCustomerAccount();
         }
+        /* Condition must only be reached if account does not already exist by card number */
+
+        /* To be replaced with SQLite query */
+//        super.customerAccounts.add(new CustomerAccount(cardNumberGen, pinGen));
+        Connect.saveNewlyCreatedCard(new CustomerAccount(cardNumberGen, pinGen));
+
+
         return "\nYour card has been created\n" +
                 "Your card number:\n" +
                 finalCardNumberGen +
@@ -94,9 +105,13 @@ public class MenuWithCustomerAccountStorage extends Repository {
         System.out.println("Enter your PIN:");
         int pinNum = scanner.nextInt();
 
+
+        /* To be replaced with SQLite query */
         if (super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x.equals(cardNum)) &&
                 (super.customerAccounts.stream().map(CustomerAccount::getPinNumber)
                         .anyMatch(x -> x.equals(pinNum)))) {
+
+
             System.out.println("\nYou have successfully logged in!\n");
             return true;
         } else {

@@ -7,9 +7,8 @@ import banking.menu.MenuWithCustomerAccountStorage;
 public class Main {
     public static void main(String[] args) {
         MenuWithCustomerAccountStorage menuWithCustomerAccountStorage = new MenuWithCustomerAccountStorage();
-        Connect connect;
         if(args!=null){
-            connect = new Connect(args);
+            menuWithCustomerAccountStorage = new MenuWithCustomerAccountStorage(args);
         }
 
         boolean loginStatus = false;

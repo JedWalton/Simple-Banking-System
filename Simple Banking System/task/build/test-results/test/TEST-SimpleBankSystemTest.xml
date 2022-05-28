@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-05-28T13:05:14" hostname="PC" time="0.176">
+<testsuite name="SimpleBankSystemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-05-28T13:19:56" hostname="PC" time="0.189">
   <properties/>
-  <testcase name="start" classname="SimpleBankSystemTest" time="0.176">
-    <failure message="java.lang.AssertionError: Wrong answer in test #5&#10;&#10;Your database doesn't save newly created cards.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Arguments: -fileName card.s3db&#10;&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000004357054901&#10;1162&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000002016917351&#10;1825&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000001683966501&#10;6171&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000008680856031&#10;5773&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000009150342791&#10;7935&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 0&#10;Bye!" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #5
+  <testcase name="start" classname="SimpleBankSystemTest" time="0.189">
+    <failure message="java.lang.AssertionError: Wrong answer in test #5&#10;&#10;Your database doesn't save newly created cards.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Arguments: -fileName card.s3db&#10;&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000007054135931&#10;3314&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000003695260691&#10;5377&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000007953075121&#10;2539&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000004894229651&#10;4019&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 1&#10;4000004817418811&#10;5954&#10;1. Create an account&#10;2. Log into account&#10;0. Exit&#10;&gt; 0&#10;Bye!" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #5
 
 Your database doesn't save newly created cards.
 
@@ -17,32 +17,32 @@ Arguments: -fileName card.s3db
 2. Log into account
 0. Exit
 &gt; 1
-4000004357054901
-1162
+4000007054135931
+3314
 1. Create an account
 2. Log into account
 0. Exit
 &gt; 1
-4000002016917351
-1825
+4000003695260691
+5377
 1. Create an account
 2. Log into account
 0. Exit
 &gt; 1
-4000001683966501
-6171
+4000007953075121
+2539
 1. Create an account
 2. Log into account
 0. Exit
 &gt; 1
-4000008680856031
-5773
+4000004894229651
+4019
 1. Create an account
 2. Log into account
 0. Exit
 &gt; 1
-4000009150342791
-7935
+4000004817418811
+5954
 1. Create an account
 2. Log into account
 0. Exit
@@ -128,32 +128,32 @@ Start test 5?[0m
 2. Log into account
 0. Exit
 > 1
-4000004357054901
-1162
+4000007054135931
+3314
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000002016917351
-1825
+4000003695260691
+5377
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000001683966501
-6171
+4000007953075121
+2539
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000008680856031
-5773
+4000004894229651
+4019
 1. Create an account
 2. Log into account
 0. Exit
 > 1
-4000009150342791
-7935
+4000004817418811
+5954
 1. Create an account
 2. Log into account
 0. Exit
