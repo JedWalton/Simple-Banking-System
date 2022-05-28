@@ -4,7 +4,7 @@ import banking.menu.MenuWithCustomerAccountStorage;
 
 public class Main {
     public static void main(String[] args) {
-        MenuWithCustomerAccountStorage menuWithCustomerAccountStorage = new MenuWithCustomerAccountStorage();
+        MenuWithCustomerAccountStorage menuWithCustomerAccountStorage = new MenuWithCustomerAccountStorage(args);
         boolean loginStatus = false;
         int currentState = 0;
         while (true) {

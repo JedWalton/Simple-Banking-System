@@ -7,7 +7,10 @@ import java.util.Scanner;
 
 public class MenuWithCustomerAccountStorage extends Repository {
 
-    public MenuWithCustomerAccountStorage() {
+    public MenuWithCustomerAccountStorage(String[] args) {
+        if (args!=null){
+            this.args = args;
+        }
     }
 
     public void displayCustomerAccountLoggedInView() {
@@ -53,7 +56,6 @@ public class MenuWithCustomerAccountStorage extends Repository {
         System.out.println(cardNumberGen);
         System.out.println(pinGen);
 
-
         long finalCardNumberGen = cardNumberGen;
         if (!super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x == finalCardNumberGen)) {
             super.customerAccounts.add(new CustomerAccount(cardNumberGen, pinGen));
@@ -94,7 +96,6 @@ public class MenuWithCustomerAccountStorage extends Repository {
         long cardNum = scanner.nextLong();
         System.out.println("Enter your PIN:");
         int pinNum = scanner.nextInt();
-
 
         if (super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x.equals(cardNum)) &&
                 (super.customerAccounts.stream().map(CustomerAccount::getPinNumber)

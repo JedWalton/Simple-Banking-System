@@ -489,6 +489,217 @@ files:
         }
     }
   learner_created: false
+- name: src/banking/menu/MenuWithCustomerAccountStorage.java
+  visible: true
+  text: |+
+    package banking.menu;
+
+    import banking.account.CustomerAccount;
+
+    import java.util.Random;
+    import java.util.Scanner;
+
+    public class MenuWithCustomerAccountStorage extends Repository {
+
+        public MenuWithCustomerAccountStorage() {
+        }
+
+        public void displayCustomerAccountLoggedInView() {
+            System.out.println("1. Balance");
+            System.out.println("2. Log out");
+            System.out.println("0. Exit");
+        }
+
+        public int getMenuOption_ZeroToTwoInclusive() {
+            Scanner scanner = new Scanner(System.in);
+
+            int userin = scanner.nextInt();
+            while (userin != 0 && userin != 1 && userin != 2) {
+                userin = scanner.nextInt();
+            }
+            return userin;
+        }
+
+        public void display_createAccount_Login_Menu() {
+            System.out.println("1. Create an account");
+            System.out.println("2. Log into account");
+            System.out.println("0. Exit");
+        }
+
+        public String generateCustomerAccount() {
+            Random rnd = new Random();
+            /* Generates pin numbers */
+            int pinGen = 1000 + rnd.nextInt(9000 - 1);
+            long numberGen = (100000000L + rnd.nextLong(900000000L));
+            String bin = "400000";
+            String cardNumberGenString = String.valueOf(numberGen);
+            String checksum = "1";
+            long cardNumberGen = Long.parseLong(bin.concat(cardNumberGenString).concat(checksum));
+
+            while (!passesLuhnsAlgorithm(cardNumberGen)) {
+                pinGen = 1000 + rnd.nextInt(9000 - 1);
+                numberGen = (100000000L + rnd.nextLong(900000000L));
+                bin = "400000";
+                cardNumberGenString = String.valueOf(numberGen);
+                checksum = "1";
+                cardNumberGen = Long.parseLong(bin.concat(cardNumberGenString).concat(checksum));
+            }
+            System.out.println(cardNumberGen);
+            System.out.println(pinGen);
+
+
+            long finalCardNumberGen = cardNumberGen;
+            if (!super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x == finalCardNumberGen)) {
+                super.customerAccounts.add(new CustomerAccount(cardNumberGen, pinGen));
+            }
+            return "\nYour card has been created\n" +
+                    "Your card number:\n" +
+                    finalCardNumberGen +
+                    "\nYour card PIN:\n" +
+                    pinGen +
+                    "\n";
+        }
+
+        public boolean passesLuhnsAlgorithm(long cardNumberGen) {
+            String ccNumber = String.valueOf(cardNumberGen);
+            int sum = 0;
+            boolean alternate = false;
+            for (int i = ccNumber.length() - 1; i >= 0; i--)
+            {
+                long n = Long.parseLong(ccNumber.substring(i, i + 1));
+                if (alternate)
+                {
+                    n *= 2;
+                    if (n > 9)
+                    {
+                        n = (n % 10) + 1;
+                    }
+                }
+                sum += n;
+                alternate = !alternate;
+            }
+            return (sum % 10 == 0);
+        }
+
+        public boolean LogIntoAccount() {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("\nEnter your card number:");
+            System.out.print(">");
+            long cardNum = scanner.nextLong();
+            System.out.println("Enter your PIN:");
+            int pinNum = scanner.nextInt();
+
+
+            if (super.customerAccounts.stream().map(CustomerAccount::getCardNumber).anyMatch(x -> x.equals(cardNum)) &&
+                    (super.customerAccounts.stream().map(CustomerAccount::getPinNumber)
+                            .anyMatch(x -> x.equals(pinNum)))) {
+                System.out.println("\nYou have successfully logged in!\n");
+                return true;
+            } else {
+                System.out.println("\nWrong card number or PIN!\n");
+                return false;
+            }
+        }
+        private void LogOutOfAccount() {
+            System.out.println("\nYou have successfully logged out!\n");
+        }
+
+        public int menuOneLogic() {
+            display_createAccount_Login_Menu();
+            int menuOption = getMenuOption_ZeroToTwoInclusive();
+            boolean loginStatus = false;
+            if (menuOption == 1) {
+                generateCustomerAccount();
+                return 0;
+            } else if (menuOption == 2) {
+                loginStatus = LogIntoAccount();
+                if (loginStatus) {
+                    return 1;
+                }
+            } else if (menuOption == 0) {
+                System.out.println("Bye!");
+                System.exit(1);
+            }
+            /* stay on same menu */
+            return 0;
+        }
+
+        public int menuTwoLogic() {
+            displayCustomerAccountLoggedInView();
+            int menuOption = getMenuOption_ZeroToTwoInclusive();
+            if (menuOption == 1) {
+                getBalance();
+                /* Stay on login page */
+                return 1;
+            } else if (menuOption == 2) {
+                LogOutOfAccount();
+                /* Back to main menu */
+                return 0;
+            } else if (menuOption == 0) {
+                System.out.println("Bye!");
+                System.exit(1);
+            }
+            /* stay on same menu */
+            return 1;
+        }
+
+        private void getBalance() {
+            System.out.println("\nBalance: 0\n");
+        }
+    }
+
+
+  learner_created: true
+- name: src/banking/menu/Repository.java
+  visible: true
+  text: |
+    package banking.menu;
+
+
+    import banking.account.CustomerAccount;
+
+    import java.util.ArrayList;
+
+    public class Repository {
+        ArrayList<CustomerAccount> customerAccounts;
+        public Repository() {
+            this.customerAccounts =new ArrayList<CustomerAccount>();
+        }
+        public ArrayList<CustomerAccount> getCustomerAccounts() {
+            return customerAccounts;
+        }
+
+    }
+  learner_created: true
+- name: src/banking/account/CustomerAccount.java
+  visible: true
+  text: |
+    package banking.account;
+
+    public class CustomerAccount {
+        long cardNumber;
+        int pin;
+
+        public long getCardNumber() {
+            return cardNumber;
+        }
+
+        public int getPinNumber() {
+            return pin;
+        }
+
+        public CustomerAccount(long cardNumber, int pin) {
+            this.cardNumber = cardNumber;
+            this.pin = pin;
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/8427#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: "Exception in test #1\n\njava.lang.NullPointerException: Cannot load from\
+    \ object array because &quot;this.args&quot; is null\n\tat banking.menu.Repository.&lt;init&gt;(Repository.java:22)\n\
+    \tat banking.menu.MenuWithCustomerAccountStorage.&lt;init&gt;(MenuWithCustomerAccountStorage.java:10)\n\
+    \tat banking.Main.main(Main.java:7)\n\nArguments: -fileName card.s3db"
+  time: Sat, 28 May 2022 11:21:09 UTC
 record: -1
