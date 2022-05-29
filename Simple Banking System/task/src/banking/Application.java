@@ -1,5 +1,6 @@
 package banking;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Application {
@@ -17,8 +18,6 @@ public class Application {
         currentState = 0;
         menuLoopEntryPoint();
     }
-
-
 
     /* This loop ends only by System.exit */
     public void menuLoopEntryPoint() {
@@ -119,10 +118,10 @@ public class Application {
             doTransfer();
             return 1;
         } else if (menuOption == 4) {
+            closeAccount();
             return 1;
         } else if (menuOption == 5) {
             LogOutOfAccount();
-            /* Back to main menu */
             return 0;
         } else if (menuOption == 0) {
             System.out.println("Bye!");
@@ -130,6 +129,14 @@ public class Application {
         }
         /* stay on same menu */
         return 1;
+    }
+
+    private void closeAccount() {
+        if (database.performCloseAccount(currentlyActiveCardNumber, currentlyActivePinNumber)) {
+            System.out.println("The account has been closed!");
+        } else {
+            System.out.println("Something went wrong, account not closed");
+        }
     }
 
     private void doTransfer() {
@@ -144,15 +151,13 @@ public class Application {
         } else {
             System.out.println("\nEnter how much money you want to transfer:");
             long amountToTransfer = scanner.nextLong();
-            if(database.getBalance(currentlyActiveCardNumber, currentlyActivePinNumber) > amountToTransfer) {
-                database.transfer(amountToTransfer, cardNumToTransferTo);
+            if(database.performTransfer(currentlyActiveCardNumber, currentlyActivePinNumber,
+                    amountToTransfer, cardNumToTransferTo)) {
+               System.out.println("Success!");
             } else {
                 System.out.println("Not enough money!");
             }
-
-
         }
-        /* Do the transfer */
     }
 
     private void addIncome() {

@@ -1,10 +1,8 @@
 package banking;
 
 import org.sqlite.SQLiteDataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 
 public class Database {
 
@@ -19,7 +17,6 @@ public class Database {
 
         initTable_card();
     }
-
 
     public void initTable_card() {
         try (Connection con = this.dataSource.getConnection()) {
@@ -61,7 +58,7 @@ public class Database {
             try (Statement statement = con.createStatement()) {
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()) {
-                    if(!(rs.getString("number").isEmpty())) {
+                    if (!(rs.getString("number").isEmpty())) {
                         return true;
                     }
                 }
@@ -81,9 +78,9 @@ public class Database {
             try (Statement statement = con.createStatement()) {
                 ResultSet rs = statement.executeQuery(query);
                 while (rs.next()) {
-                    if(!(rs.getString("number").isEmpty() ||
+                    if (!(rs.getString("number").isEmpty() ||
                             rs.getString("pin").isEmpty())) {
-                       return true;
+                        return true;
                     }
                 }
             } catch (SQLException e) {
@@ -130,8 +127,93 @@ public class Database {
         throw new RuntimeException("Balance not found error. Did you enter card and pin correctly?");
     }
 
-    public boolean transfer(long amountToTransfer, long cardNumToTransferTo) {
 
+    public boolean performTransfer(long cardNumber, int pinNum, long amountToTransfer, long cardNumToTransferTo)  {
+
+        /* Transfer logic */
+
+        String transferOutSQL = "UPDATE card SET balance = balance - (?) WHERE number = (?) AND pin = ?";
+        String transferInSQL = "UPDATE card SET balance = balance + (?) WHERE number = (?)";
+
+        // if initial balance > amount to transfer
+        if (getBalance(cardNumber, pinNum) >= amountToTransfer) {
+
+            /* Try to run the transfer queries */
+            try (Connection con = dataSource.getConnection()) {
+
+                // Disable auto-commit mode
+                con.setAutoCommit(false);
+
+                try (PreparedStatement transferOut = con.prepareStatement(transferOutSQL);
+                     PreparedStatement transferIn = con.prepareStatement(transferInSQL)) {
+
+                    Savepoint savepoint = con.setSavepoint();
+
+                    // Insert an invoice
+                    transferOut.setLong(1, amountToTransfer);
+                    transferOut.setLong(2, cardNumber);
+                    transferOut.setInt(3, pinNum);
+                    transferOut.executeUpdate();
+
+                    // Insert an order
+                    transferIn.setLong(1, amountToTransfer);
+                    transferIn.setLong(2, cardNumToTransferTo);
+                    transferIn.executeUpdate();
+
+                    con.commit();
+
+                    return true;
+
+                } catch (SQLException e) {
+                    try {
+                        System.err.print("Transaction is being rolled back");
+                        con.rollback();
+                    } catch (SQLException excep) {
+                        excep.printStackTrace();
+                    }
+                    return false;
+                }
+            } catch (SQLException e) {
+                return false;
+            }
+        }
         return false;
+    }
+
+    public boolean performCloseAccount(long cardNumber, int pinNum) {
+
+        String deleteAccountSQL = "DELETE FROM card WHERE number = (?) AND pin = (?)";
+
+        try (Connection con = dataSource.getConnection()) {
+
+            // Disable auto-commit mode
+            con.setAutoCommit(false);
+
+            try (PreparedStatement deleteAccount = con.prepareStatement(deleteAccountSQL)) {
+
+                Savepoint savepoint = con.setSavepoint();
+
+                // Insert an invoice
+                deleteAccount.setLong(1, cardNumber);
+                deleteAccount.setInt(2, pinNum);
+                deleteAccount.executeUpdate();
+
+                con.commit();
+
+                return true;
+
+            } catch (SQLException e) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    con.rollback();
+                } catch (SQLException excep) {
+                    excep.printStackTrace();
+                }
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+
     }
 }
